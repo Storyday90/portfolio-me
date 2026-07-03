@@ -14,6 +14,7 @@ import {
   Wrench,
   Briefcase,
   MessageSquare,
+  LogIn,
 } from "lucide-react";
 import { SiGithub, SiX } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
@@ -23,12 +24,12 @@ import { DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 const sectionIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  "#about": User,
-  "#skills": Wrench,
-  "#projects": Briefcase,
-  "#experience": Briefcase,
-  "#testimonials": MessageSquare,
-  "#contact": Mail,
+  "/#about": User,
+  "/#skills": Wrench,
+  "/#projects": Briefcase,
+  "/#experience": Briefcase,
+  "/#testimonials": MessageSquare,
+  "/#contact": Mail,
 };
 
 const socialIcons = { github: SiGithub, linkedin: FaLinkedin, mail: Mail, resume: FileText, twitter: SiX };
@@ -86,7 +87,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
               <Command.Group heading="Navigate" className="px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-2">
                 <Command.Item
-                  onSelect={() => go("#hero")}
+                  onSelect={() => go("/#hero")}
                   className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground data-[selected=true]:bg-surface-hover"
                 >
                   <Home className="size-4 text-muted" />
@@ -107,6 +108,14 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                     </Command.Item>
                   );
                 })}
+                <Command.Item
+                  onSelect={() => go("/login")}
+                  className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground data-[selected=true]:bg-surface-hover"
+                >
+                  <LogIn className="size-4 text-muted" />
+                  Login
+                  <ArrowRight className="ml-auto size-3.5 text-muted" />
+                </Command.Item>
               </Command.Group>
 
               <Command.Group heading="Links" className="px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-2">

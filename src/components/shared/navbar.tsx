@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { Command, Menu, X } from "lucide-react";
+import { Command, LogIn, Menu, X } from "lucide-react";
 import { navItems, siteConfig } from "@/lib/data/site";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { cn } from "@/lib/utils";
@@ -17,7 +17,7 @@ interface NavbarProps {
 export function Navbar({ onOpenCommandPalette }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const sectionIds = useMemo(
-    () => ["hero", ...navItems.map((item) => item.href.replace("#", ""))],
+    () => ["hero", ...navItems.map((item) => item.href.split("#")[1])],
     [],
   );
   const activeId = useActiveSection(sectionIds);
@@ -30,7 +30,7 @@ export function Navbar({ onOpenCommandPalette }: NavbarProps) {
           aria-label="Primary"
         >
           <Link
-            href="#hero"
+            href="/#hero"
             className="rounded-full px-3 py-1.5 text-sm font-semibold tracking-tight text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             {siteConfig.name}
@@ -39,7 +39,7 @@ export function Navbar({ onOpenCommandPalette }: NavbarProps) {
 
           <ul className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => {
-              const isActive = activeId === item.href.replace("#", "");
+              const isActive = activeId === item.href.split("#")[1];
               return (
                 <li key={item.href}>
                   <Link
@@ -75,6 +75,16 @@ export function Navbar({ onOpenCommandPalette }: NavbarProps) {
               <span className="text-xs">K</span>
             </Button>
             <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="sm"
+              asChild
+              className="hidden items-center gap-1.5 text-muted sm:flex"
+            >
+              <Link href="/login">
+                <LogIn className="size-3.5" /> Login
+              </Link>
+            </Button>
             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu">
               <Menu className="size-5" />
             </Button>
@@ -115,6 +125,15 @@ export function Navbar({ onOpenCommandPalette }: NavbarProps) {
                   </Link>
                 </motion.li>
               ))}
+              <motion.li variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}>
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 text-2xl font-medium text-muted"
+                >
+                  <LogIn className="size-5" /> Login
+                </Link>
+              </motion.li>
             </motion.ul>
           </motion.div>
         )}
