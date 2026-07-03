@@ -7,7 +7,10 @@ import type { NavItem, SocialLink } from "@/types";
 export const siteConfig = {
   name: "Suhail",
   title: "Software Engineer",
-  headline: "Software engineer crafting scalable products & meaningful digital experiences.",
+  headline: "Software engineer building scalable systems and AI-powered products.",
+  /** Art-directed line breaks for the hero — curated for rhythm, not left to natural reflow. */
+  headlineLines: ["Software engineer", "building scalable systems", "and AI-powered products."],
+  headlineHighlights: ["scalable", "AI-powered"],
   intro:
     "I design and build backend systems, cloud infrastructure, and AI-driven products — obsessed with clean architecture and the small details that make software feel effortless.",
   location: "Remote / Worldwide",

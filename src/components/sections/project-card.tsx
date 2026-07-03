@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, FileText } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { Badge } from "@/components/ui/badge";
 import { fadeInUp } from "@/lib/motion";
@@ -82,15 +82,6 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             >
               <ArrowUpRight className="size-4" />
               Live Demo
-            </Link>
-          )}
-          {project.caseStudy && (
-            <Link
-              href={project.caseStudy}
-              className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-foreground"
-            >
-              <FileText className="size-4" />
-              Case Study
             </Link>
           )}
         </div>

@@ -7,8 +7,50 @@ import { ArrowDown, ArrowRight, Mail, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/data/site";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
-const headlineWords = siteConfig.headline.split(" ");
+type CodeToken = { t: string; c?: string };
+
+const CODE_LINES: CodeToken[][] = [
+  [
+    { t: "export async function ", c: "text-accent" },
+    { t: "getUser", c: "text-foreground" },
+    { t: "(id: " },
+    { t: "string", c: "text-accent" },
+    { t: ") {" },
+  ],
+  [
+    { t: "  const ", c: "text-accent" },
+    { t: "cached = " },
+    { t: "await ", c: "text-accent" },
+    { t: "cache.get(id);" },
+  ],
+  [
+    { t: "  if ", c: "text-accent" },
+    { t: "(cached) " },
+    { t: "return", c: "text-accent" },
+    { t: " cached;" },
+  ],
+  [{ t: "" }],
+  [
+    { t: "  const ", c: "text-accent" },
+    { t: "user = " },
+    { t: "await ", c: "text-accent" },
+    { t: "db.user.findUnique({" },
+  ],
+  [{ t: "    where: { id }," }],
+  [{ t: "  });" }],
+  [{ t: "" }],
+  [
+    { t: "  await ", c: "text-accent" },
+    { t: "cache.set(id, user);" },
+  ],
+  [
+    { t: "  return", c: "text-accent" },
+    { t: " user;" },
+  ],
+  [{ t: "}" }],
+];
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -63,19 +105,24 @@ export function Hero() {
             Available for new opportunities
           </motion.div>
 
-          <h1 className="text-balance text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            {headlineWords.map((word, i) => (
-              <motion.span
-                key={`${word}-${i}`}
-                variants={fadeInUp}
-                className={`inline-block ${
-                  ["scalable", "meaningful", "digital"].some((k) => word.toLowerCase().includes(k))
-                    ? "text-gradient"
-                    : ""
-                }`}
-              >
-                {word}&nbsp;
-              </motion.span>
+          <h1 className="text-5xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-6xl lg:text-[4.75rem]">
+            {siteConfig.headlineLines.map((line, lineIndex) => (
+              <span key={lineIndex} className="block">
+                {line.split(" ").map((word, i) => (
+                  <motion.span
+                    key={`${lineIndex}-${i}`}
+                    variants={fadeInUp}
+                    className={cn(
+                      "inline-block",
+                      siteConfig.headlineHighlights.some((h) =>
+                        word.toLowerCase().includes(h.toLowerCase()),
+                      ) && "text-gradient",
+                    )}
+                  >
+                    {word}&nbsp;
+                  </motion.span>
+                ))}
+              </span>
             ))}
           </h1>
 
@@ -98,7 +145,7 @@ export function Hero() {
 
           <motion.dl variants={fadeInUp} className="flex flex-wrap gap-x-10 gap-y-4 pt-4">
             {[
-              { label: "Years learning & building", value: `${siteConfig.yearsLearning}+` },
+              { label: "Years of experience", value: `${siteConfig.yearsLearning}+` },
               { label: "Production projects shipped", value: "20+" },
               { label: "Focus", value: "Backend · AI · Cloud" },
             ].map((stat) => (
@@ -121,31 +168,37 @@ export function Hero() {
               className="absolute inset-0"
               style={{
                 background:
-                  "radial-gradient(120% 120% at 20% 0%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 55%)",
+                  "radial-gradient(120% 120% at 20% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%)",
               }}
               aria-hidden
             />
             <div
-              className="absolute inset-0 opacity-70"
-              style={{
-                backgroundImage: "radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px)",
-                backgroundSize: "24px 24px",
-              }}
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute -right-10 -top-10 size-56 rounded-full opacity-50 blur-3xl"
+              className="pointer-events-none absolute -right-10 -top-10 size-56 rounded-full opacity-40 blur-3xl"
               style={{ background: "var(--accent)" }}
               aria-hidden
             />
-            <div className="relative flex h-full items-center justify-center">
-              <span className="bg-gradient-to-b from-foreground/25 to-foreground/5 bg-clip-text font-mono text-9xl font-semibold text-transparent select-none">
-                {siteConfig.name.charAt(0)}
-              </span>
+
+            <div className="relative flex items-center gap-1.5 border-b border-border px-4 py-3">
+              <span className="size-2.5 rounded-full bg-red-500/70" aria-hidden />
+              <span className="size-2.5 rounded-full bg-yellow-500/70" aria-hidden />
+              <span className="size-2.5 rounded-full bg-green-500/70" aria-hidden />
+              <span className="ml-3 font-mono text-xs text-muted">cache.ts</span>
             </div>
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 border-t border-border bg-background/50 p-4 backdrop-blur-md">
-              <span className="text-sm font-medium text-foreground">{siteConfig.name}</span>
-              <span className="text-xs text-muted">{siteConfig.title}</span>
+
+            <div className="relative p-5">
+              {CODE_LINES.map((line, i) => (
+                <div key={i} className="whitespace-pre font-mono text-[13px] leading-relaxed text-foreground/55">
+                  {line[0]?.t === "" ? (
+                    <>&nbsp;</>
+                  ) : (
+                    line.map((seg, j) => (
+                      <span key={j} className={seg.c}>
+                        {seg.t}
+                      </span>
+                    ))
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 

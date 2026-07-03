@@ -26,10 +26,9 @@ export function About() {
               {philosophy}
             </p>
             <p className="text-base leading-relaxed text-muted">
-              I&apos;m {siteConfig.name}, a software engineer with {siteConfig.yearsLearning}+ years of hands-on
-              learning across backend systems, cloud infrastructure, and — more recently — applied AI. I enjoy
-              building products end-to-end: designing the data model, shipping the API, and polishing the interface
-              that sits on top of it.
+              I&apos;m {siteConfig.name}, a software engineer with {siteConfig.yearsLearning}+ years building
+              backend systems, cloud infrastructure, and — more recently — applied AI. I work end-to-end:
+              designing the data model, shipping the API, and polishing the interface that sits on top of it.
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
               {focusAreas.map((area) => (
@@ -48,7 +47,7 @@ export function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="grid gap-4 sm:grid-cols-2"
+            className="flex flex-col gap-1 rounded-2xl border border-border bg-surface p-2"
           >
             {values.map((value, i) => {
               const Icon = valueIcons[i % valueIcons.length];
@@ -56,13 +55,13 @@ export function About() {
                 <motion.div
                   key={value.title}
                   variants={fadeInUp}
-                  className="group flex flex-col gap-3 rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/30"
+                  className="flex items-start gap-3 rounded-xl px-4 py-3.5 transition-colors hover:bg-surface-hover"
                 >
-                  <div className="flex size-10 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
-                    <Icon className="size-5" />
+                  <Icon className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+                  <div className="flex flex-col gap-0.5">
+                    <h3 className="text-sm font-semibold text-foreground">{value.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted">{value.description}</p>
                   </div>
-                  <h3 className="text-sm font-semibold text-foreground">{value.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted">{value.description}</p>
                 </motion.div>
               );
             })}

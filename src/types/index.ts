@@ -1,3 +1,5 @@
+import type { IconType } from "react-icons";
+
 export interface NavItem {
   label: string;
   href: string;
@@ -11,7 +13,8 @@ export interface SocialLink {
 
 export interface Skill {
   name: string;
-  level: number; // 0-100
+  /** Brand icon, when the skill is a real product with a recognizable mark (e.g. TypeScript, AWS). */
+  Icon?: IconType;
 }
 
 export interface SkillCategory {
@@ -29,7 +32,6 @@ export interface Project {
   image: string;
   github?: string;
   demo?: string;
-  caseStudy?: string;
   featured: boolean;
   year: string;
 }
@@ -49,10 +51,4 @@ export interface Testimonial {
   company: string;
   quote: string;
   avatar: string;
-}
-
-export interface TechStackItem {
-  name: string;
-  icon: string;
-  category: "language" | "framework" | "tool" | "cloud" | "database";
 }

@@ -3,7 +3,6 @@ import { About } from "@/components/sections/about";
 import { Skills } from "@/components/sections/skills";
 import { Projects } from "@/components/sections/projects";
 import { Experience } from "@/components/sections/experience";
-import { TechStack } from "@/components/sections/tech-stack";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Contact } from "@/components/sections/contact";
 import { siteConfig, socialLinks } from "@/lib/data/site";
@@ -33,7 +32,6 @@ export default function Home() {
       <Skills />
       <Projects />
       <Experience />
-      <TechStack />
       <Testimonials />
       <Contact />
     </>

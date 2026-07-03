@@ -16,6 +16,7 @@ export function LoadingScreen() {
     <AnimatePresence>
       {loading && (
         <motion.div
+          id="loading-screen"
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}

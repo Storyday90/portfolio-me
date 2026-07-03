@@ -1,3 +1,19 @@
+import {
+  SiDocker,
+  SiGit,
+  SiKubernetes,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiRedis,
+  SiTailwindcss,
+  SiTypescript,
+  SiGo,
+} from "react-icons/si";
+import { FaAws } from "react-icons/fa6";
 import type { SkillCategory } from "@/types";
 
 export const skillCategories: SkillCategory[] = [
@@ -5,57 +21,58 @@ export const skillCategories: SkillCategory[] = [
     category: "Languages",
     icon: "code",
     skills: [
-      { name: "TypeScript", level: 95 },
-      { name: "Python", level: 90 },
-      { name: "Go", level: 80 },
-      { name: "SQL", level: 88 },
+      { name: "TypeScript", Icon: SiTypescript },
+      { name: "Python", Icon: SiPython },
+      { name: "Go", Icon: SiGo },
+      { name: "SQL" },
     ],
   },
   {
     category: "Backend",
     icon: "server",
     skills: [
-      { name: "Node.js", level: 95 },
-      { name: "Django / FastAPI", level: 88 },
-      { name: "REST & GraphQL APIs", level: 92 },
-      { name: "Microservices", level: 85 },
+      { name: "Node.js", Icon: SiNodedotjs },
+      { name: "Django / FastAPI" },
+      { name: "REST & GraphQL APIs" },
+      { name: "Microservices" },
     ],
   },
   {
     category: "Frontend",
     icon: "layout",
     skills: [
-      { name: "React / Next.js", level: 93 },
-      { name: "TailwindCSS", level: 92 },
-      { name: "Framer Motion", level: 82 },
+      { name: "React", Icon: SiReact },
+      { name: "Next.js", Icon: SiNextdotjs },
+      { name: "TailwindCSS", Icon: SiTailwindcss },
+      { name: "Framer Motion" },
     ],
   },
   {
     category: "Cloud & DevOps",
     icon: "cloud",
     skills: [
-      { name: "AWS", level: 87 },
-      { name: "Docker", level: 90 },
-      { name: "Kubernetes", level: 75 },
-      { name: "CI/CD (GitHub Actions)", level: 85 },
+      { name: "AWS", Icon: FaAws },
+      { name: "Docker", Icon: SiDocker },
+      { name: "Kubernetes", Icon: SiKubernetes },
+      { name: "CI/CD (GitHub Actions)" },
     ],
   },
   {
     category: "Databases",
     icon: "database",
     skills: [
-      { name: "PostgreSQL", level: 90 },
-      { name: "Redis", level: 82 },
-      { name: "MongoDB", level: 78 },
+      { name: "PostgreSQL", Icon: SiPostgresql },
+      { name: "Redis", Icon: SiRedis },
+      { name: "MongoDB", Icon: SiMongodb },
     ],
   },
   {
     category: "Tools & AI",
     icon: "wrench",
     skills: [
-      { name: "Git", level: 95 },
-      { name: "LLM / RAG Systems", level: 85 },
-      { name: "System Design", level: 88 },
+      { name: "Git", Icon: SiGit },
+      { name: "LLM / RAG Systems" },
+      { name: "System Design" },
     ],
   },
 ];

@@ -9,7 +9,7 @@ import { testimonials } from "@/lib/data/testimonials";
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-28 sm:py-36" aria-label="Testimonials">
+    <section id="testimonials" className="relative py-20 sm:py-28" aria-label="Testimonials">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           eyebrow="Testimonials"

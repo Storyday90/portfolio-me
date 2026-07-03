@@ -77,6 +77,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        {/* Scroll-reveal animations set opacity:0 inline and rely on JS to reveal content.
+            Without this, a JS failure (or a non-executing crawler) would render the page blank. */}
+        <noscript>
+          <style>{`* { opacity: 1 !important; transform: none !important; } #loading-screen { display: none !important; }`}</style>
+        </noscript>
         <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <a
             href="#main-content"
